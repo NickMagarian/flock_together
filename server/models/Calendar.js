@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
- const EventSchema  = new Schema({
+ const CalendarSchema  = new Schema({
     title: {
         type: String,
         trim: true,
@@ -31,7 +31,7 @@ const { Schema, model } = require('mongoose');
         this.lastUpdated = Date.now();
         return this.lastUpdated;
     };
-    const Event = model("Event", EventSchema);
+    const Calendar = model("Calendar", CalendarSchema);
 
-    module.exports = Event;
+    module.exports = Calendar;
     
