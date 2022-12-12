@@ -1,35 +1,45 @@
 const { gql } = require('apollo-server-express');
 // model names and column names need to match this page
 const typeDefs = gql`
+  type Event {
+    _id:ID! 
+    title:String!
+    description:String!
+    date:String!
+  }
+
   type User {
     _id: ID!
     name: String!
     email: String!
+    password:String!
     events:[Event]
   }
 
-  type Calendar {
-    _id: ID!
-    events:[Event]
-  } 
+
 
 input EventInput{
-    eventId: String! 
-    eventTitle: String! 
-    eventDate: Date
+  title:String!
+  description:String!
+  date:String!
+}
+input UserInput {
+  name: String!
+  email: String!
+  password:String!
 }
 type Auth {
-    token: ID!
+    token: String!
     user: User
 }
   type Query {
     user: User
-    calendar: Calendar
+  }
 
   type Mutation {
-    addUser(email:String!,name:String!,password:String!): Auth
+    addUser(userInput:UserInput): Auth
     login(): Auth 
-    addEventToCalendar(): Calendar 
+    createEvent(eventInput:EventInput):Event
     addEventToUser(): User
   }
 `;
