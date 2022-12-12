@@ -11,17 +11,18 @@ const UserSchema = new Schema ({
         type: String,
         index: {
             unique: true,
-            partialFilterExpression: {email:"string"}}
+            partialFilterExpression: {email:"string"}
         },
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     },
+   password:String,
     events: {
         type: String,
         trim: true,
         required: true,
-    },
+    }
 
-
+})
 const User = model('User', UserSchema);
 
 module.exports = User;
