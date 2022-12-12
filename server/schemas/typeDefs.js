@@ -25,7 +25,6 @@ type Auth {
   type Query {
     user: User
     calendar: Calendar
-  }
 
   type Mutation {
     addUser(email:String!,name:String!,password:String!): Auth
@@ -34,5 +33,7 @@ type Auth {
     addEventToUser(): User
   }
 `;
-
+// type of mutation what params or args for login
+// what args to add event to calendar
+// what args to add event to user
 module.exports = typeDefs;
