@@ -16,12 +16,16 @@ const UserSchema = new Schema ({
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     },
    password:String,
-    events: {
-        type: String,
-        trim: true,
-        required: true,
-    }
 
+
+});
+
+
+UserSchema.virtual('events',{
+    ref:'Event',
+    localField:'_id',
+    foreignField:'user',
+    justOne:false
 })
 const User = model('User', UserSchema);
 
