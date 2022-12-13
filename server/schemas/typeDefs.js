@@ -32,10 +32,15 @@ type Auth {
     token: String!
     user: User
 }
+# all the data you need to get you need a query for
   type Query {
     user: User
+    events(userId: String!): [Event]
+    event(id: String!): Event
   }
 
+  # when we want the server to do something we use mutation
+  # think of buttons
   type Mutation {
     addUser(userInput:UserInput): Auth
     login(): Auth 
