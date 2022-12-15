@@ -10,7 +10,6 @@ const handleApprove = (approved,id) => {
 
     };
 
-    // calendar.add
 
     // AJAX post request 
     $.post('/handle_notif_response',notifDetails,(res) => {
