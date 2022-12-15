@@ -1,65 +1,47 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { REGISTER_MUTATION } from '../utils/mutations'
 
-const RegistrationForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+
+
+function RegisterPage() {
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(null);
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [signup, { data, loading, error }] = useMutation(REGISTER_MUTATION);
 
-  const handleSubmit = async (event) => {
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  function handleSubmit(event) {
     event.preventDefault();
 
-    // Perform registration here
-    try {
-      const response = await fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password, email }),
-      });
-      const data = await response.json();
-
-      if (data.success) {
-        // Redirect to login
-      } else {
-        setError('An error occurred while registering');
-      }
-    } catch (error) {
-      setError('An error occurred while registering');
-    }
-  };
+    // Sign up user
+    signup({ variables: { email, password, name, address } });
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <p>{error}</p>}
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </label>
       <label>
         Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
       </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Name:
+        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+      </label>
+      <br />
+
       <button type="submit">Sign Up</button>
     </form>
   );
-};
+}
 
-export default RegistrationForm;
+export default RegisterPage;
+``

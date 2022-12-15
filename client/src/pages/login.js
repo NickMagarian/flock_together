@@ -1,44 +1,37 @@
-import React from "react";
+import React, { useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import {LOGIN_MUTATION } from '../utils/mutations'
 
+function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [login, { data, loading, error }] = useQuery(LOGIN_MUTATION);
 
-const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-  
-      if (successful) {
-        // redirect to home page
-        
-      } else {
-        setError('Invalid username or password');
-      }
-    };
-  
-    return (
-      <form onSubmit={handleSubmit}>
-        {error && <p>{error}</p>}
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-        <button type="submit">Login or Register</button>
-      </form>
-    );
-  };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  export default LoginForm;
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    // Log in user
+    login({ variables: { email, password } });
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Email:
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </label>
+      <br />
+      <button type="submit">Log In</button>
+    </form>
+  );
+}
+
+export default LoginPage;
