@@ -1,52 +1,74 @@
 import React from 'react';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { LoginPage } from './pages/login';
-import { RegistrationForm } from './pages/register';
-import { LogoutPage } from './pages/logout';
-import calendar from './pages/calendar';
-import events from './pages/events';
-import { NotFound } from './pages/notFound';
+
+import Home from './pages/Home';
+import User from './pages/User';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+// Construct our main GraphQL API endpoint
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <div>
-        <Routes>
-          <Route 
-            path="/" 
-            element={<calendar />}
-          />
-          <Route 
-            path="/events" 
-            element={<events />}
-          />
-          <Route 
-            path="/login" 
-            element={<LoginPage />}
-          />
-          <Route 
-            path="/logout" 
-            element={<LogoutPage />}
-          />
-          <Route 
-            path="/register" 
-            element={<RegistrationForm />}
-          />
-          <Route 
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
-      </div>
-    </Router>
-  </ApolloProvider>
+      <Router>
+        <div className="flex-column justify-flex-start min-100-vh">
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route 
+                path="/" 
+                element={<Home />} 
+              />
+              <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/register" 
+                element={<Register />} 
+              />
+              <Route 
+                path="/users/:userId" 
+                element={<User />} 
+              />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 
