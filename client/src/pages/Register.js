@@ -1,3 +1,4 @@
+import { redirect } from "react-router-dom";
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -53,6 +54,8 @@ const Register = () => {
       });
 
       Auth.login(data.addUser.token);
+      return redirect('/calendar')
+
     } catch (e) {
       console.error(e);
     }
@@ -106,7 +109,7 @@ const Register = () => {
                 <button
                   className="btn btn-block btn-info"
                   style={{ cursor: 'pointer' }}
-                  type="submit"
+                 href="/calendar" type="submit"
                 >
                   Submit
                 </button>

@@ -23,5 +23,9 @@
   "homepage": "https://github.com/NickMagarian/flock_together#readme",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "@fullcalendar/interaction": "^6.0.0",
+    "@fullcalendar/timegrid": "^6.0.0"
   }
 }

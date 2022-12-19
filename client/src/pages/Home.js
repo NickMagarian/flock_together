@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useQuery } from '@apollo/client';
 
 import UserList from '../components/UserList';
@@ -10,7 +11,10 @@ const Home = () => {
   const users = data?.users || [];
 
   return (
-    <main>
+    
+    <main className='home'>
+      <a href="/calendar"><button style={{height:"100px",backgroundColor:"red", width:"200px"}}>view my calendar</button></a>
+      
       <div className="flex-row justify-center">
         <div className="col-12 col-md-10 my-3">
           {loading ? (
@@ -24,6 +28,7 @@ const Home = () => {
         </div>
       </div>
     </main>
+    
   );
 };
 
