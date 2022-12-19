@@ -17,32 +17,3 @@ function EventChat() {
 export default EventChat
 
 
-// export default EventChat
-
-//for connecting chatengine to our back end
-// var axios = require('axios');
-// var data = {
-//     "username": "bob_baker",
-//     "secret": "secret-123-jBj02",
-//     "email": "b_baker@mail.com",
-//     "first_name": "Bob",
-//     "last_name": "Baker",
-//     "custom_json": {"fav_game": "Candy Crush", "high_score": 2002}
-// }
-
-// var config = {
-//     method: 'post',
-//     url: 'https://api.chatengine.io/users/',
-//     headers: {
-//         'PRIVATE-KEY': '543b98f2-680f-47ad-ba4a-eabd7d0b0edd'
-//     },
-//     data : data
-// };
-
-// axios(config)
-// .then(function (response) {
-//     console.log(JSON.stringify(response.data));
-// })
-// .catch(function (error) {
-//     console.log(error);
-// });
