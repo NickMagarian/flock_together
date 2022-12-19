@@ -1,0 +1,8 @@
+[
+  {
+    "name": "Nick",
+    "email": "n@gmail.com",
+    "password": "password",
+    "events": ["Party"]
+  }
+]

@@ -1,29 +1,63 @@
-const { User, Calendar } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    user: async () => {
-      return User.find({});
+    users: async () => {
+      return User.find();
     },
-    calendar: async (parent, args,context) => {
-     
-      return Calendar.find({});
+
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
     },
   },
+
   Mutation: {
-    addUser: async (parent, args) => {
-      const newUser = await User.create(args);
-      const token= signToken(newUser)
-      return {token,newUser};
+    addUser: async (parent, { name, email, password }) => {
+      const user = await User.create({ name, email, password });
+      const token = signToken(user);
+
+      return { token, user };
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError('No user with this email found!');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect password!');
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
+
+    addEvent: async (parent, { userId, event }) => {
+      return user.findOneAndUpdate(
+        { _id: userId },
+        {
+          $addToSet: { events: event },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeUser: async (parent, { userId }) => {
+      return User.findOneAndDelete({ _id: userId });
+    },
+    removeEvent: async (parent, { userId, event }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { events: event } },
         { new: true }
       );
-      return vote;
     },
   },
 };
