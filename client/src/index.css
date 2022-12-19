@@ -903,7 +903,7 @@ a:hover {
 }
 
 .text-dark {
-  color: #1a1a1a !important;
+  color: #e6780a !important;
 }
 
 .text-white {
@@ -924,7 +924,11 @@ a:hover {
 }
 
 .bg-info {
-  background-color: #1bbc9b !important;
+  /* background-color: #1bbc9b !important; */
+  background-image: url('../public/logo.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size:auto;
 }
 
 .bg-danger {
@@ -1030,7 +1034,7 @@ a:hover {
 }
 
 .btn.btn-info {
-  background-color: #1bbc9b;
+  background-color: #bc941b;
   color: #ffffff;
 }
 
