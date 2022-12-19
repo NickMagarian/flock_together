@@ -6,6 +6,9 @@ import { ADD_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+var axios = require('axios');
+
+
 const Register = () => {
   const [formState, setFormState] = useState({
     name: '',
@@ -14,6 +17,21 @@ const Register = () => {
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
+  var chatData = {
+    "username": formState.name,
+    "secret": formState.password,
+    "email": formState.email
+  };
+
+  var config = {
+	  method: 'post',
+	  url: 'https://api.chatengine.io/users/',
+	  headers: {
+		'PRIVATE-KEY': '{{private_key}}'
+	  },
+	  data : chatData
+  };
+  
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,6 +57,14 @@ const Register = () => {
       console.error(e);
     }
   };
+
+  axios(config)
+    .then(function (response) {
+	    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+	    console.log(error);
+    });
 
   return (
     <main className="flex-row justify-center mb-4">

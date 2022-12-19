@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import EventsList from '../components/EventsList';
 import EventForm from '../components/EventForm';
 
-import { QUERY_SINGLE_user } from '../utils/queries';
+import { QUERY_SINGLE_USER } from '../utils/queries';
 
 const User = () => {
   const { userId } = useParams();

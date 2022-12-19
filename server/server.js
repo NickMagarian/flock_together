@@ -14,9 +14,11 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
+// Allow to understand data
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Use build folder in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
