@@ -1,5 +1,5 @@
 # flock_together
-A group calendar with integrated chat features for planning and discussing upcoming events for families. 
+A group calendar with integrated chat features for planning and discussing upcoming events for  
 
 ##How to use FlockTogether
 To use FlockTogether you will create an account with a username a password and an email address after logging in you will be able to access your calendar with your events (that you can edit). You can also chat with your family about the upcoming events on the Chat page.

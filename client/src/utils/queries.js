@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_USERS = gql`
+export const QUERY_EVENTS = gql`
   query users {
     users {
       _id
@@ -10,8 +10,8 @@ export const QUERY_USERS = gql`
   }
 `;
 
-export const QUERY_SINGLE_USER = gql`
-  query singleUser($userId: ID!) {
+export const QUERY_SINGLE_EVENT = gql`
+  query singleEvent($userId: ID!) {
     user(userId: $userId) {
       _id
       name

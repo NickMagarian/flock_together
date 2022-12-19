@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const UserList = ({ users, title }) => {
   if (!users.length) {
-    return <h3>No Users Yet</h3>;
+    return <h3>No Events</h3>;
   }
 
   return (
@@ -27,7 +27,7 @@ const UserList = ({ users, title }) => {
                   className="btn btn-block btn-squared btn-light text-dark"
                   to={`/users/${user._id}`}
                 >
-                  View and endorse their events.
+                  
                 </Link>
               </div>
             </div>
@@ -38,3 +38,5 @@ const UserList = ({ users, title }) => {
 };
 
 export default UserList;
+
+// mongodb+srv://nick:flockpassword@cluster0.k8ri5af.mongodb.net/?retryWrites=true&w=majority
