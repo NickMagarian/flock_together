@@ -16,6 +16,7 @@ export default class CalendarPage extends React.Component {
   render() {
     return (
       <div className='calendar-page'>
+         <a href="/chat"><button style={{height:"100px",backgroundColor:"red", width:"200px"}}>event chat</button></a>
         {this.renderSidebar()}
         <div className='calendar-page-main'>
           <FullCalendar
