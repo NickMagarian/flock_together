@@ -14,7 +14,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
+import CalendarPage from './pages/calendar';
+import Chat from './pages/chat';
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -58,6 +59,15 @@ function App() {
               <Route 
                 path="/register" 
                 element={<Register />} 
+              />
+             
+              <Route 
+                path="/calendar" 
+                element={<CalendarPage/>} 
+              />
+              <Route 
+                path="/chat" 
+                element={<Chat/>} 
               />
               <Route 
                 path="/users/:userId" 
