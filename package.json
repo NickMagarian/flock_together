@@ -2,7 +2,7 @@
   "name": "flock",
   "version": "1.0.0",
   "description": "",
-  "main": "server/server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js --ignore client",
@@ -23,5 +23,8 @@
   "homepage": "https://github.com/NickMagarian/flock_together#readme",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "@fullcalendar/daygrid": "^6.0.0"
   }
 }
