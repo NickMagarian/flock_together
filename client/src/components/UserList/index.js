@@ -38,5 +38,3 @@ const UserList = ({ users, title }) => {
 };
 
 export default UserList;
-
-// mongodb+srv://nick:flockpassword@cluster0.k8ri5af.mongodb.net/?retryWrites=true&w=majority

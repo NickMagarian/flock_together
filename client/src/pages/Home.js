@@ -13,8 +13,6 @@ const Home = () => {
   return (
     
     <main className='home'>
-      <a href="/calendar"><button style={{height:"100px",backgroundColor:"red", width:"200px"}}>view my calendar</button></a>
-      
       <div className="flex-row justify-center">
         <div className="col-12 col-md-10 my-3">
           {loading ? (

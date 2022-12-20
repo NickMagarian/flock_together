@@ -35,8 +35,8 @@ const Header = () => {
               <Link className="btn btn-lg btn-light m-2" to="/">
                 Home
               </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/event/:eventId">
-                Home
+              <Link className="btn btn-lg btn-light m-2" to="/calendar">
+                Calendar
               </Link>
             </>
           )}
